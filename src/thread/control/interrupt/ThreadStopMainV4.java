@@ -3,7 +3,7 @@ package thread.control.interrupt;
 import static thread.util.MyLogger.log;
 import static thread.util.ThreadUtils.sleep;
 
-public class ThreadStopMainV3 {
+public class ThreadStopMainV4 {
     public static void main(String[] args) {
         MyTask task = new MyTask();
         Thread thread = new Thread(task, "work");
@@ -19,7 +19,7 @@ public class ThreadStopMainV3 {
 
         @Override
         public void run() {
-            while(!Thread.currentThread().isInterrupted()) { // 인터럽트 상태 변경 X
+            while(!Thread.interrupted()) { // 인터럽트 상태 변경 O
                 log("작업 중");
             }
             log("work 스레드 인터럽트 상태2 = " + Thread.currentThread().isInterrupted());
@@ -32,6 +32,7 @@ public class ThreadStopMainV3 {
                 log("자원 정리 실패... 자원 정리 중 인터럽트 발생");
                 log("work 스레드 인터럽트 상태3 = " + Thread.currentThread().isInterrupted());
             }
+
         }
     }
 }
